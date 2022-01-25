@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 CM1 and CM2 | _main.knit</title>
+  <meta name="description" content="<p>This is the code from the figures presented in the CopyKit manuscript -
+Resolving clonal substructure from single cell genomic data using CopyKit.</p>" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 CM1 and CM2 | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="<p>This is the code from the figures presented in the CopyKit manuscript -
+Resolving clonal substructure from single cell genomic data using CopyKit.</p>" />
+  <meta name="github-repo" content="navinlabcode/copykit" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 CM1 and CM2 | _main.knit" />
+  
+  <meta name="twitter:description" content="<p>This is the code from the figures presented in the CopyKit manuscript -
+Resolving clonal substructure from single cell genomic data using CopyKit.</p>" />
+  
+
+<meta name="author" content="Darlan Conterno Minussi" />
+
+
+<meta name="date" content="2022-01-24" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="bm1.html"/>
+<link rel="next" href="session-info.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">CopyKit Manuscript Code</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a></li>
+<li class="chapter" data-level="2" data-path="bl1-and-bl2.html"><a href="bl1-and-bl2.html"><i class="fa fa-check"></i><b>2</b> BL1 and BL2</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="bl1-and-bl2.html"><a href="bl1-and-bl2.html#bl1"><i class="fa fa-check"></i><b>2.1</b> BL1</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="bl1-and-bl2.html"><a href="bl1-and-bl2.html#filtering"><i class="fa fa-check"></i><b>2.1.1</b> Filtering</a></li>
+<li class="chapter" data-level="2.1.2" data-path="bl1-and-bl2.html"><a href="bl1-and-bl2.html#umap-and-clustering"><i class="fa fa-check"></i><b>2.1.2</b> UMAP and clustering</a></li>
+<li class="chapter" data-level="2.1.3" data-path="bl1-and-bl2.html"><a href="bl1-and-bl2.html#subclones-heatmap"><i class="fa fa-check"></i><b>2.1.3</b> Subclones Heatmap</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="bl1-and-bl2.html"><a href="bl1-and-bl2.html#bl2"><i class="fa fa-check"></i><b>2.2</b> BL2</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="bl1-and-bl2.html"><a href="bl1-and-bl2.html#filtering-1"><i class="fa fa-check"></i><b>2.2.1</b> Filtering</a></li>
+<li class="chapter" data-level="2.2.2" data-path="bl1-and-bl2.html"><a href="bl1-and-bl2.html#umap-and-clustering-1"><i class="fa fa-check"></i><b>2.2.2</b> UMAP and clustering</a></li>
+<li class="chapter" data-level="2.2.3" data-path="bl1-and-bl2.html"><a href="bl1-and-bl2.html#subclones-heatmap-1"><i class="fa fa-check"></i><b>2.2.3</b> Subclones Heatmap</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bm1.html"><a href="bm1.html"><i class="fa fa-check"></i><b>3</b> BM1</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="bm1.html"><a href="bm1.html#reading-datasets"><i class="fa fa-check"></i><b>3.1</b> Reading datasets</a></li>
+<li class="chapter" data-level="3.2" data-path="bm1.html"><a href="bm1.html#running-umap-and-clustering"><i class="fa fa-check"></i><b>3.2</b> Running UMAP and Clustering</a></li>
+<li class="chapter" data-level="3.3" data-path="bm1.html"><a href="bm1.html#consensus-tree"><i class="fa fa-check"></i><b>3.3</b> Consensus tree</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html"><i class="fa fa-check"></i><b>4</b> CM1 and CM2</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm1"><i class="fa fa-check"></i><b>4.1</b> CM1</a></li>
+<li class="chapter" data-level="4.2" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm1-colon"><i class="fa fa-check"></i><b>4.2</b> CM1 colon</a></li>
+<li class="chapter" data-level="4.3" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm1-liver"><i class="fa fa-check"></i><b>4.3</b> CM1 liver</a></li>
+<li class="chapter" data-level="4.4" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm1-merging"><i class="fa fa-check"></i><b>4.4</b> CM1 merging</a></li>
+<li class="chapter" data-level="4.5" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm2"><i class="fa fa-check"></i><b>4.5</b> CM2</a></li>
+<li class="chapter" data-level="4.6" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm2-colon"><i class="fa fa-check"></i><b>4.6</b> CM2 colon</a></li>
+<li class="chapter" data-level="4.7" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm2-liver"><i class="fa fa-check"></i><b>4.7</b> CM2 liver</a></li>
+<li class="chapter" data-level="4.8" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm2-merging"><i class="fa fa-check"></i><b>4.8</b> CM2 merging</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>5</b> Session Info</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cm1-and-cm2" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> CM1 and CM2</h1>
+<div id="cm1" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> CM1</h2>
+</div>
+<div id="cm1-colon" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> CM1 colon</h2>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb283-1"><a href="cm1-and-cm2.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Running data with CopyKit for the primary colon sample</span></span>
+<span id="cb283-2"><a href="cm1-and-cm2.html#cb283-2" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> <span class="fu">runVarbin</span>(<span class="st">&quot;/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/CM1/colon/marked_bams&quot;</span>, <span class="at">remove_Y =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Counting reads for genome hg38 and resolution: 200kb</code></pre>
+<pre><code>## 441 bam files had less than 10 mean bincounts and were removed.</code></pre>
+<pre><code>## Performing GC correction.</code></pre>
+<pre><code>## Smoothing bin counts.</code></pre>
+<pre><code>## Running segmentation algorithm: CBS for genome hg38</code></pre>
+<pre><code>## Merging levels.</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb291"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb291-1"><a href="cm1-and-cm2.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding diploid and low-quality cells and excluding it from the copykit object</span></span>
+<span id="cb291-2"><a href="cm1-and-cm2.html#cb291-2" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> <span class="fu">findOutliers</span>(cm1_tumor_primary)</span></code></pre></div>
+<pre><code>## Calculating correlation matrix.</code></pre>
+<pre><code>## Marked 376 cells as outliers.</code></pre>
+<pre><code>## Adding information to metadata. Access with colData(scCNA).</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb296-1"><a href="cm1-and-cm2.html#cb296-1" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> <span class="fu">findAneuploidCells</span>(cm1_tumor_primary)</span></code></pre></div>
+<pre><code>## number of iterations= 11</code></pre>
+<pre><code>## Copykit detected 39 that are possibly euploid cells using a resolution of: 0.047</code></pre>
+<pre><code>## Added information to colData(CopyKit).</code></pre>
+<div class="sourceCode" id="cb300"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb300-1"><a href="cm1-and-cm2.html#cb300-1" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> cm1_tumor_primary[,<span class="fu">colData</span>(cm1_tumor_primary)<span class="sc">$</span>outlier <span class="sc">==</span> <span class="cn">FALSE</span>]</span>
+<span id="cb300-2"><a href="cm1-and-cm2.html#cb300-2" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> cm1_tumor_primary[,<span class="fu">colData</span>(cm1_tumor_primary)<span class="sc">$</span>is_aneuploid <span class="sc">==</span> <span class="cn">TRUE</span>]</span>
+<span id="cb300-3"><a href="cm1-and-cm2.html#cb300-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb300-4"><a href="cm1-and-cm2.html#cb300-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding the tissue information to colData</span></span>
+<span id="cb300-5"><a href="cm1-and-cm2.html#cb300-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cm1_tumor_primary)<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="st">&#39;primary&#39;</span></span></code></pre></div>
+</div>
+<div id="cm1-liver" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> CM1 liver</h2>
+<div class="sourceCode" id="cb301"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb301-1"><a href="cm1-and-cm2.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Running data with CopyKit for the liver sample</span></span>
+<span id="cb301-2"><a href="cm1-and-cm2.html#cb301-2" aria-hidden="true" tabindex="-1"></a>cm1_tumor_met <span class="ot">&lt;-</span></span>
+<span id="cb301-3"><a href="cm1-and-cm2.html#cb301-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">runVarbin</span>(</span>
+<span id="cb301-4"><a href="cm1-and-cm2.html#cb301-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/CM1/liver/marked_bams&quot;</span>,</span>
+<span id="cb301-5"><a href="cm1-and-cm2.html#cb301-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">remove_Y =</span> <span class="cn">TRUE</span></span>
+<span id="cb301-6"><a href="cm1-and-cm2.html#cb301-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Counting reads for genome hg38 and resolution: 200kb</code></pre>
+<pre><code>## 549 bam files had less than 10 mean bincounts and were removed.</code></pre>
+<pre><code>## Performing GC correction.</code></pre>
+<pre><code>## Smoothing bin counts.</code></pre>
+<pre><code>## Running segmentation algorithm: CBS for genome hg38</code></pre>
+<pre><code>## Merging levels.</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb309-1"><a href="cm1-and-cm2.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding diploid and low-quality cells and excluding it from the copykit object</span></span>
+<span id="cb309-2"><a href="cm1-and-cm2.html#cb309-2" aria-hidden="true" tabindex="-1"></a>cm1_tumor_met <span class="ot">&lt;-</span> <span class="fu">findOutliers</span>(cm1_tumor_met)</span></code></pre></div>
+<pre><code>## Calculating correlation matrix.</code></pre>
+<pre><code>## Marked 104 cells as outliers.</code></pre>
+<pre><code>## Adding information to metadata. Access with colData(scCNA).</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb314-1"><a href="cm1-and-cm2.html#cb314-1" aria-hidden="true" tabindex="-1"></a>cm1_tumor_met <span class="ot">&lt;-</span> <span class="fu">findAneuploidCells</span>(cm1_tumor_met)</span></code></pre></div>
+<pre><code>## number of iterations= 6</code></pre>
+<pre><code>## Copykit detected 16 that are possibly euploid cells using a resolution of: 0.053</code></pre>
+<pre><code>## Added information to colData(CopyKit).</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb318-1"><a href="cm1-and-cm2.html#cb318-1" aria-hidden="true" tabindex="-1"></a>cm1_tumor_met <span class="ot">&lt;-</span></span>
+<span id="cb318-2"><a href="cm1-and-cm2.html#cb318-2" aria-hidden="true" tabindex="-1"></a>  cm1_tumor_met[, <span class="fu">colData</span>(cm1_tumor_met)<span class="sc">$</span>outlier <span class="sc">==</span> <span class="cn">FALSE</span>]</span>
+<span id="cb318-3"><a href="cm1-and-cm2.html#cb318-3" aria-hidden="true" tabindex="-1"></a>cm1_tumor_met <span class="ot">&lt;-</span></span>
+<span id="cb318-4"><a href="cm1-and-cm2.html#cb318-4" aria-hidden="true" tabindex="-1"></a>  cm1_tumor_met[, <span class="fu">colData</span>(cm1_tumor_met)<span class="sc">$</span>is_aneuploid <span class="sc">==</span> <span class="cn">TRUE</span>]</span>
+<span id="cb318-5"><a href="cm1-and-cm2.html#cb318-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb318-6"><a href="cm1-and-cm2.html#cb318-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding the tissue information to colData</span></span>
+<span id="cb318-7"><a href="cm1-and-cm2.html#cb318-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cm1_tumor_met)<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="st">&#39;metastasis&#39;</span></span></code></pre></div>
+</div>
+<div id="cm1-merging" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> CM1 merging</h2>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb319-1"><a href="cm1-and-cm2.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merging the three copykit objects</span></span>
+<span id="cb319-2"><a href="cm1-and-cm2.html#cb319-2" aria-hidden="true" tabindex="-1"></a>cm1_merged <span class="ot">&lt;-</span> <span class="fu">cbind</span>(cm1_tumor_primary,</span>
+<span id="cb319-3"><a href="cm1-and-cm2.html#cb319-3" aria-hidden="true" tabindex="-1"></a>                    cm1_tumor_met)</span>
+<span id="cb319-4"><a href="cm1-and-cm2.html#cb319-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb319-5"><a href="cm1-and-cm2.html#cb319-5" aria-hidden="true" tabindex="-1"></a>cm1_merged <span class="ot">&lt;-</span> <span class="fu">runUmap</span>(cm1_merged)</span></code></pre></div>
+<pre><code>## Using assay: logr</code></pre>
+<pre><code>## Embedding data with UMAP. Using seed 17</code></pre>
+<pre><code>## Access reduced dimensions slot with: SingleCellExperiment::reducedDim(scCNA, &#39;umap&#39;).</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb324-1"><a href="cm1-and-cm2.html#cb324-1" aria-hidden="true" tabindex="-1"></a>cm1_merged <span class="ot">&lt;-</span> <span class="fu">findSuggestedK</span>(cm1_merged)</span></code></pre></div>
+<pre><code>## Calculating jaccard similarity for k range: 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57</code></pre>
+<pre><code>## </code></pre>
+<pre><code>## Suggested k = 46 with median jaccard similarity of: 0.955</code></pre>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb328-1"><a href="cm1-and-cm2.html#cb328-1" aria-hidden="true" tabindex="-1"></a>cm1_merged_suggestedk <span class="ot">&lt;-</span> <span class="fu">plotSuggestedK</span>(cm1_merged)</span>
+<span id="cb328-2"><a href="cm1-and-cm2.html#cb328-2" aria-hidden="true" tabindex="-1"></a>cm1_merged_suggestedk</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm1_merge-1.png" width="672" /></p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb329-1"><a href="cm1-and-cm2.html#cb329-1" aria-hidden="true" tabindex="-1"></a>cm1_merged <span class="ot">&lt;-</span> <span class="fu">findClusters</span>(cm1_merged)</span></code></pre></div>
+<pre><code>## Using suggested k_subclones = 46</code></pre>
+<pre><code>## Finding clusters, using method: hdbscan</code></pre>
+<pre><code>## Found 340 outliers cells (group &#39;c0&#39;)</code></pre>
+<pre><code>## Found 20 subclones.</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb335-1"><a href="cm1-and-cm2.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="co"># HDBSCAN is an outlier aware clustering algorithm</span></span>
+<span id="cb335-2"><a href="cm1-and-cm2.html#cb335-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in this analysis all cells marked as outliers (c0) from hdbscan are excluded.</span></span>
+<span id="cb335-3"><a href="cm1-and-cm2.html#cb335-3" aria-hidden="true" tabindex="-1"></a>cm1_merged <span class="ot">&lt;-</span> cm1_merged[, <span class="fu">colData</span>(cm1_merged)<span class="sc">$</span>subclones <span class="sc">!=</span> <span class="st">&#39;c0&#39;</span>]</span>
+<span id="cb335-4"><a href="cm1-and-cm2.html#cb335-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb335-5"><a href="cm1-and-cm2.html#cb335-5" aria-hidden="true" tabindex="-1"></a>cm1_merged_tp_umap_p <span class="ot">&lt;-</span> <span class="fu">plotUmap</span>(cm1_merged, <span class="at">label =</span> <span class="st">&#39;timepoint&#39;</span>)</span></code></pre></div>
+<pre><code>## Plotting Umap.</code></pre>
+<pre><code>## Coloring by: timepoint.</code></pre>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb338-1"><a href="cm1-and-cm2.html#cb338-1" aria-hidden="true" tabindex="-1"></a>cm1_merged_tp_umap_p</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm1_merge-2.png" width="672" /></p>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb339-1"><a href="cm1-and-cm2.html#cb339-1" aria-hidden="true" tabindex="-1"></a>cm1_merged_umap_p <span class="ot">&lt;-</span> <span class="fu">plotUmap</span>(cm1_merged, <span class="at">label =</span> <span class="st">&#39;subclones&#39;</span>)</span></code></pre></div>
+<pre><code>## Plotting Umap.</code></pre>
+<pre><code>## Coloring by: subclones.</code></pre>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb342-1"><a href="cm1-and-cm2.html#cb342-1" aria-hidden="true" tabindex="-1"></a>cm1_merged_umap_p</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm1_merge-3.png" width="672" /></p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb343-1"><a href="cm1-and-cm2.html#cb343-1" aria-hidden="true" tabindex="-1"></a>cm1_merged <span class="ot">&lt;-</span> <span class="fu">calcConsensus</span>(cm1_merged)</span>
+<span id="cb343-2"><a href="cm1-and-cm2.html#cb343-2" aria-hidden="true" tabindex="-1"></a>cm1_merged <span class="ot">&lt;-</span> <span class="fu">runConsensusPhylo</span>(cm1_merged)</span>
+<span id="cb343-3"><a href="cm1-and-cm2.html#cb343-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-4"><a href="cm1-and-cm2.html#cb343-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cm1_merged)<span class="sc">$</span>timepoint <span class="ot">&lt;-</span></span>
+<span id="cb343-5"><a href="cm1-and-cm2.html#cb343-5" aria-hidden="true" tabindex="-1"></a>  forcats<span class="sc">::</span><span class="fu">fct_relevel</span>(<span class="fu">colData</span>(cm1_merged)<span class="sc">$</span>timepoint,</span>
+<span id="cb343-6"><a href="cm1-and-cm2.html#cb343-6" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">c</span>(<span class="st">&quot;primary&quot;</span>, <span class="st">&quot;metastasis&quot;</span>))</span>
+<span id="cb343-7"><a href="cm1-and-cm2.html#cb343-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-8"><a href="cm1-and-cm2.html#cb343-8" aria-hidden="true" tabindex="-1"></a>cm1_selected_genes <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb343-9"><a href="cm1-and-cm2.html#cb343-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;SMAD3&quot;</span>,</span>
+<span id="cb343-10"><a href="cm1-and-cm2.html#cb343-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;FHIT&quot;</span>,</span>
+<span id="cb343-11"><a href="cm1-and-cm2.html#cb343-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;APC&quot;</span>,</span>
+<span id="cb343-12"><a href="cm1-and-cm2.html#cb343-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;SOX4&quot;</span>,</span>
+<span id="cb343-13"><a href="cm1-and-cm2.html#cb343-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;IGFBP7&quot;</span>,</span>
+<span id="cb343-14"><a href="cm1-and-cm2.html#cb343-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;CDK8&quot;</span>,</span>
+<span id="cb343-15"><a href="cm1-and-cm2.html#cb343-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;PIK3CA&quot;</span>,</span>
+<span id="cb343-16"><a href="cm1-and-cm2.html#cb343-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;MYC&quot;</span>,</span>
+<span id="cb343-17"><a href="cm1-and-cm2.html#cb343-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;TP53&#39;</span>,</span>
+<span id="cb343-18"><a href="cm1-and-cm2.html#cb343-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;GATA4&quot;</span>,</span>
+<span id="cb343-19"><a href="cm1-and-cm2.html#cb343-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;CHEK1&quot;</span>,</span>
+<span id="cb343-20"><a href="cm1-and-cm2.html#cb343-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;TGFB1&quot;</span>,</span>
+<span id="cb343-21"><a href="cm1-and-cm2.html#cb343-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;TIAM1&quot;</span></span>
+<span id="cb343-22"><a href="cm1-and-cm2.html#cb343-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb343-23"><a href="cm1-and-cm2.html#cb343-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb343-24"><a href="cm1-and-cm2.html#cb343-24" aria-hidden="true" tabindex="-1"></a>cm1_merged_selected_hvg_gc <span class="ot">&lt;-</span></span>
+<span id="cb343-25"><a href="cm1-and-cm2.html#cb343-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotGeneCopy</span>(cm1_merged,</span>
+<span id="cb343-26"><a href="cm1-and-cm2.html#cb343-26" aria-hidden="true" tabindex="-1"></a>               <span class="at">genes =</span> cm1_selected_genes,</span>
+<span id="cb343-27"><a href="cm1-and-cm2.html#cb343-27" aria-hidden="true" tabindex="-1"></a>               <span class="at">label =</span> <span class="st">&#39;timepoint&#39;</span>,</span>
+<span id="cb343-28"><a href="cm1-and-cm2.html#cb343-28" aria-hidden="true" tabindex="-1"></a>               <span class="at">dodge.width =</span> .<span class="dv">8</span>) <span class="sc">+</span> <span class="fu">scale_fill_hue</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## Coloring by: timepoint</code></pre>
+<pre><code>## Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which will replace the existing scale.</code></pre>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb346-1"><a href="cm1-and-cm2.html#cb346-1" aria-hidden="true" tabindex="-1"></a>cm1_merged_selected_hvg_gc</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm1_merge-4.png" width="672" /></p>
+<p>To root the tree, we will use an inferred Most Recent Common Ancestral from the primary tumor and provide that as an argument to the runConsensusPhylo function.
+This consensus tree will be used by plotHeatmap to order the subclones on the plot</p>
+<div class="sourceCode" id="cb347"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb347-1"><a href="cm1-and-cm2.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clustering and inferring the MRCA from the clusters</span></span>
+<span id="cb347-2"><a href="cm1-and-cm2.html#cb347-2" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> <span class="fu">runUmap</span>(cm1_tumor_primary)</span></code></pre></div>
+<pre><code>## Using assay: logr</code></pre>
+<pre><code>## Embedding data with UMAP. Using seed 17</code></pre>
+<pre><code>## Access reduced dimensions slot with: SingleCellExperiment::reducedDim(scCNA, &#39;umap&#39;).</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb352"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb352-1"><a href="cm1-and-cm2.html#cb352-1" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> <span class="fu">findSuggestedK</span>(cm1_tumor_primary)</span></code></pre></div>
+<pre><code>## Calculating jaccard similarity for k range: 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41</code></pre>
+<pre><code>## </code></pre>
+<pre><code>## Suggested k = 34 with median jaccard similarity of: 0.995</code></pre>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb356-1"><a href="cm1-and-cm2.html#cb356-1" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> <span class="fu">findClusters</span>(cm1_tumor_primary)</span></code></pre></div>
+<pre><code>## Using suggested k_subclones = 34</code></pre>
+<pre><code>## Finding clusters, using method: hdbscan</code></pre>
+<pre><code>## Found 219 outliers cells (group &#39;c0&#39;)</code></pre>
+<pre><code>## Found 12 subclones.</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb362-1"><a href="cm1-and-cm2.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="co"># HDBSCAN is an outlier aware clustering algorithm</span></span>
+<span id="cb362-2"><a href="cm1-and-cm2.html#cb362-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in this analysis all cells marked as outliers (c0) from hdbscan are excluded.</span></span>
+<span id="cb362-3"><a href="cm1-and-cm2.html#cb362-3" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span></span>
+<span id="cb362-4"><a href="cm1-and-cm2.html#cb362-4" aria-hidden="true" tabindex="-1"></a>  cm1_tumor_primary[, <span class="fu">colData</span>(cm1_tumor_primary)<span class="sc">$</span>subclones <span class="sc">!=</span> <span class="st">&#39;c0&#39;</span>]</span>
+<span id="cb362-5"><a href="cm1-and-cm2.html#cb362-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb362-6"><a href="cm1-and-cm2.html#cb362-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb362-7"><a href="cm1-and-cm2.html#cb362-7" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating the consensus of the Merged dataset and using the inferred</span></span>
+<span id="cb362-8"><a href="cm1-and-cm2.html#cb362-8" aria-hidden="true" tabindex="-1"></a><span class="co"># primary MRCA as the root of the tree</span></span>
+<span id="cb362-9"><a href="cm1-and-cm2.html#cb362-9" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> <span class="fu">calcConsensus</span>(cm1_tumor_primary)</span>
+<span id="cb362-10"><a href="cm1-and-cm2.html#cb362-10" aria-hidden="true" tabindex="-1"></a>cm1_tumor_primary <span class="ot">&lt;-</span> <span class="fu">inferMrca</span>(cm1_tumor_primary)</span>
+<span id="cb362-11"><a href="cm1-and-cm2.html#cb362-11" aria-hidden="true" tabindex="-1"></a>cm1_merged <span class="ot">&lt;-</span> <span class="fu">runConsensusPhylo</span>(</span>
+<span id="cb362-12"><a href="cm1-and-cm2.html#cb362-12" aria-hidden="true" tabindex="-1"></a>  cm1_merged,</span>
+<span id="cb362-13"><a href="cm1-and-cm2.html#cb362-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">root =</span> <span class="st">&#39;user&#39;</span>,</span>
+<span id="cb362-14"><a href="cm1-and-cm2.html#cb362-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">root_user =</span> <span class="fu">metadata</span>(cm1_tumor_primary)<span class="sc">$</span>inferred_mrca</span>
+<span id="cb362-15"><a href="cm1-and-cm2.html#cb362-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb362-16"><a href="cm1-and-cm2.html#cb362-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb362-17"><a href="cm1-and-cm2.html#cb362-17" aria-hidden="true" tabindex="-1"></a><span class="co"># relevel factors to plot in the desired order</span></span>
+<span id="cb362-18"><a href="cm1-and-cm2.html#cb362-18" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cm1_merged)<span class="sc">$</span>timepoint <span class="ot">&lt;-</span></span>
+<span id="cb362-19"><a href="cm1-and-cm2.html#cb362-19" aria-hidden="true" tabindex="-1"></a>  forcats<span class="sc">::</span><span class="fu">fct_relevel</span>(<span class="fu">colData</span>(cm1_merged)<span class="sc">$</span>timepoint,</span>
+<span id="cb362-20"><a href="cm1-and-cm2.html#cb362-20" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">c</span>(<span class="st">&quot;metastasis&quot;</span>, <span class="st">&quot;primary&quot;</span>))</span>
+<span id="cb362-21"><a href="cm1-and-cm2.html#cb362-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb362-22"><a href="cm1-and-cm2.html#cb362-22" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting the phylogeny with subclones labels and pie charts</span></span>
+<span id="cb362-23"><a href="cm1-and-cm2.html#cb362-23" aria-hidden="true" tabindex="-1"></a><span class="co">#indicating the frequency of each timepoint</span></span>
+<span id="cb362-24"><a href="cm1-and-cm2.html#cb362-24" aria-hidden="true" tabindex="-1"></a>cm1_merged_consensus_phylo <span class="ot">&lt;-</span></span>
+<span id="cb362-25"><a href="cm1-and-cm2.html#cb362-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotPhylo</span>(cm1_merged,</span>
+<span id="cb362-26"><a href="cm1-and-cm2.html#cb362-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">label =</span> <span class="st">&#39;subclones&#39;</span>,</span>
+<span id="cb362-27"><a href="cm1-and-cm2.html#cb362-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">consensus =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb362-28"><a href="cm1-and-cm2.html#cb362-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">group =</span> <span class="st">&#39;timepoint&#39;</span>)</span>
+<span id="cb362-29"><a href="cm1-and-cm2.html#cb362-29" aria-hidden="true" tabindex="-1"></a>cm1_merged_consensus_phylo</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm1_tree-1.png" width="672" /></p>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb363-1"><a href="cm1-and-cm2.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotHeatmap</span>(cm1_merged, <span class="at">label =</span> <span class="fu">c</span>(<span class="st">&#39;subclones&#39;</span>, <span class="st">&#39;timepoint&#39;</span>))</span></code></pre></div>
+<pre><code>## Plotting Heatmap.</code></pre>
+<p><img src="_main_files/figure-html/cm1_heatmap-1.png" width="768" /></p>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb365-1"><a href="cm1-and-cm2.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotHeatmap</span>(</span>
+<span id="cb365-2"><a href="cm1-and-cm2.html#cb365-2" aria-hidden="true" tabindex="-1"></a>  cm1_merged,</span>
+<span id="cb365-3"><a href="cm1-and-cm2.html#cb365-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">c</span>(<span class="st">&#39;subclones&#39;</span>),</span>
+<span id="cb365-4"><a href="cm1-and-cm2.html#cb365-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">consensus =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb365-5"><a href="cm1-and-cm2.html#cb365-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">genes =</span> cm1_selected_genes</span>
+<span id="cb365-6"><a href="cm1-and-cm2.html#cb365-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Plotting Heatmap.</code></pre>
+<p><img src="_main_files/figure-html/cm1_consensus_heatmap-1.png" width="672" /></p>
+</div>
+<div id="cm2" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> CM2</h2>
+</div>
+<div id="cm2-colon" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> CM2 colon</h2>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb367-1"><a href="cm1-and-cm2.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Running data with CopyKit for the primary colon sample</span></span>
+<span id="cb367-2"><a href="cm1-and-cm2.html#cb367-2" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> <span class="fu">runVarbin</span>(<span class="st">&quot;/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/CM2/colon/marked_bams&quot;</span>, <span class="at">remove_Y =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## Counting reads for genome hg38 and resolution: 200kb</code></pre>
+<pre><code>## 89 bam files had less than 10 mean bincounts and were removed.</code></pre>
+<pre><code>## Performing GC correction.</code></pre>
+<pre><code>## Smoothing bin counts.</code></pre>
+<pre><code>## Running segmentation algorithm: CBS for genome hg38</code></pre>
+<pre><code>## Merging levels.</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb375-1"><a href="cm1-and-cm2.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding diploid and low-quality cells and excluding it from the copykit object</span></span>
+<span id="cb375-2"><a href="cm1-and-cm2.html#cb375-2" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> <span class="fu">findOutliers</span>(cm2_tumor_primary)</span></code></pre></div>
+<pre><code>## Calculating correlation matrix.</code></pre>
+<pre><code>## Marked 126 cells as outliers.</code></pre>
+<pre><code>## Adding information to metadata. Access with colData(scCNA).</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb380"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb380-1"><a href="cm1-and-cm2.html#cb380-1" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> <span class="fu">findAneuploidCells</span>(cm2_tumor_primary)</span></code></pre></div>
+<pre><code>## number of iterations= 9</code></pre>
+<pre><code>## Copykit detected 10 that are possibly euploid cells using a resolution of: 0.051</code></pre>
+<pre><code>## Added information to colData(CopyKit).</code></pre>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb384-1"><a href="cm1-and-cm2.html#cb384-1" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> cm2_tumor_primary[,<span class="fu">colData</span>(cm2_tumor_primary)<span class="sc">$</span>outlier <span class="sc">==</span> <span class="cn">FALSE</span>]</span>
+<span id="cb384-2"><a href="cm1-and-cm2.html#cb384-2" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> cm2_tumor_primary[,<span class="fu">colData</span>(cm2_tumor_primary)<span class="sc">$</span>is_aneuploid <span class="sc">==</span> <span class="cn">TRUE</span>]</span>
+<span id="cb384-3"><a href="cm1-and-cm2.html#cb384-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb384-4"><a href="cm1-and-cm2.html#cb384-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding the tissue information to colData</span></span>
+<span id="cb384-5"><a href="cm1-and-cm2.html#cb384-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cm2_tumor_primary)<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="st">&#39;primary&#39;</span></span></code></pre></div>
+</div>
+<div id="cm2-liver" class="section level2" number="4.7">
+<h2><span class="header-section-number">4.7</span> CM2 liver</h2>
+<div class="sourceCode" id="cb385"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb385-1"><a href="cm1-and-cm2.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Running data with CopyKit for the liver sample</span></span>
+<span id="cb385-2"><a href="cm1-and-cm2.html#cb385-2" aria-hidden="true" tabindex="-1"></a>cm2_tumor_met <span class="ot">&lt;-</span></span>
+<span id="cb385-3"><a href="cm1-and-cm2.html#cb385-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">runVarbin</span>(</span>
+<span id="cb385-4"><a href="cm1-and-cm2.html#cb385-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/CM2/liver/marked_bams&quot;</span>,</span>
+<span id="cb385-5"><a href="cm1-and-cm2.html#cb385-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">remove_Y =</span> <span class="cn">TRUE</span></span>
+<span id="cb385-6"><a href="cm1-and-cm2.html#cb385-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## Counting reads for genome hg38 and resolution: 200kb</code></pre>
+<pre><code>## 149 bam files had less than 10 mean bincounts and were removed.</code></pre>
+<pre><code>## Performing GC correction.</code></pre>
+<pre><code>## Smoothing bin counts.</code></pre>
+<pre><code>## Running segmentation algorithm: CBS for genome hg38</code></pre>
+<pre><code>## Merging levels.</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb393"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb393-1"><a href="cm1-and-cm2.html#cb393-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Finding diploid and low-quality cells and excluding it from the copykit object</span></span>
+<span id="cb393-2"><a href="cm1-and-cm2.html#cb393-2" aria-hidden="true" tabindex="-1"></a>cm2_tumor_met <span class="ot">&lt;-</span> <span class="fu">findOutliers</span>(cm2_tumor_met)</span></code></pre></div>
+<pre><code>## Calculating correlation matrix.</code></pre>
+<pre><code>## Marked 264 cells as outliers.</code></pre>
+<pre><code>## Adding information to metadata. Access with colData(scCNA).</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb398-1"><a href="cm1-and-cm2.html#cb398-1" aria-hidden="true" tabindex="-1"></a>cm2_tumor_met <span class="ot">&lt;-</span> <span class="fu">findAneuploidCells</span>(cm2_tumor_met)</span></code></pre></div>
+<pre><code>## number of iterations= 9</code></pre>
+<pre><code>## Copykit detected 7 that are possibly euploid cells using a resolution of: 0.051</code></pre>
+<pre><code>## Added information to colData(CopyKit).</code></pre>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb402-1"><a href="cm1-and-cm2.html#cb402-1" aria-hidden="true" tabindex="-1"></a>cm2_tumor_met <span class="ot">&lt;-</span></span>
+<span id="cb402-2"><a href="cm1-and-cm2.html#cb402-2" aria-hidden="true" tabindex="-1"></a>  cm2_tumor_met[, <span class="fu">colData</span>(cm2_tumor_met)<span class="sc">$</span>outlier <span class="sc">==</span> <span class="cn">FALSE</span>]</span>
+<span id="cb402-3"><a href="cm1-and-cm2.html#cb402-3" aria-hidden="true" tabindex="-1"></a>cm2_tumor_met <span class="ot">&lt;-</span></span>
+<span id="cb402-4"><a href="cm1-and-cm2.html#cb402-4" aria-hidden="true" tabindex="-1"></a>  cm2_tumor_met[, <span class="fu">colData</span>(cm2_tumor_met)<span class="sc">$</span>is_aneuploid <span class="sc">==</span> <span class="cn">TRUE</span>]</span>
+<span id="cb402-5"><a href="cm1-and-cm2.html#cb402-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb402-6"><a href="cm1-and-cm2.html#cb402-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding the tissue information to colData</span></span>
+<span id="cb402-7"><a href="cm1-and-cm2.html#cb402-7" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cm2_tumor_met)<span class="sc">$</span>timepoint <span class="ot">&lt;-</span> <span class="st">&#39;metastasis&#39;</span></span></code></pre></div>
+</div>
+<div id="cm2-merging" class="section level2" number="4.8">
+<h2><span class="header-section-number">4.8</span> CM2 merging</h2>
+<div class="sourceCode" id="cb403"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb403-1"><a href="cm1-and-cm2.html#cb403-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Merging the three copykit objects</span></span>
+<span id="cb403-2"><a href="cm1-and-cm2.html#cb403-2" aria-hidden="true" tabindex="-1"></a>cm2_merged <span class="ot">&lt;-</span> <span class="fu">cbind</span>(cm2_tumor_primary,</span>
+<span id="cb403-3"><a href="cm1-and-cm2.html#cb403-3" aria-hidden="true" tabindex="-1"></a>                    cm2_tumor_met)</span>
+<span id="cb403-4"><a href="cm1-and-cm2.html#cb403-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb403-5"><a href="cm1-and-cm2.html#cb403-5" aria-hidden="true" tabindex="-1"></a>cm2_merged <span class="ot">&lt;-</span> <span class="fu">runUmap</span>(cm2_merged)</span></code></pre></div>
+<pre><code>## Using assay: logr</code></pre>
+<pre><code>## Embedding data with UMAP. Using seed 17</code></pre>
+<pre><code>## Access reduced dimensions slot with: SingleCellExperiment::reducedDim(scCNA, &#39;umap&#39;).</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb408-1"><a href="cm1-and-cm2.html#cb408-1" aria-hidden="true" tabindex="-1"></a>cm2_merged <span class="ot">&lt;-</span> <span class="fu">findSuggestedK</span>(cm2_merged)</span></code></pre></div>
+<pre><code>## Calculating jaccard similarity for k range: 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41</code></pre>
+<pre><code>## </code></pre>
+<pre><code>## Suggested k = 19 with median jaccard similarity of: 0.831</code></pre>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb412-1"><a href="cm1-and-cm2.html#cb412-1" aria-hidden="true" tabindex="-1"></a>cm2_merged_suggestedk <span class="ot">&lt;-</span> <span class="fu">plotSuggestedK</span>(cm2_merged)</span>
+<span id="cb412-2"><a href="cm1-and-cm2.html#cb412-2" aria-hidden="true" tabindex="-1"></a>cm2_merged_suggestedk</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm2_merge-1.png" width="672" /></p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb413-1"><a href="cm1-and-cm2.html#cb413-1" aria-hidden="true" tabindex="-1"></a>cm2_merged <span class="ot">&lt;-</span> <span class="fu">findClusters</span>(cm2_merged)</span></code></pre></div>
+<pre><code>## Using suggested k_subclones = 19</code></pre>
+<pre><code>## Finding clusters, using method: hdbscan</code></pre>
+<pre><code>## Found 248 outliers cells (group &#39;c0&#39;)</code></pre>
+<pre><code>## Found 22 subclones.</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb419-1"><a href="cm1-and-cm2.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="co"># HDBSCAN is an outlier aware clustering algorithm</span></span>
+<span id="cb419-2"><a href="cm1-and-cm2.html#cb419-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in this analysis all cells marked as outliers (c0) from hdbscan are excluded.</span></span>
+<span id="cb419-3"><a href="cm1-and-cm2.html#cb419-3" aria-hidden="true" tabindex="-1"></a>cm2_merged <span class="ot">&lt;-</span> cm2_merged[, <span class="fu">colData</span>(cm2_merged)<span class="sc">$</span>subclones <span class="sc">!=</span> <span class="st">&#39;c0&#39;</span>]</span>
+<span id="cb419-4"><a href="cm1-and-cm2.html#cb419-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb419-5"><a href="cm1-and-cm2.html#cb419-5" aria-hidden="true" tabindex="-1"></a>cm2_merged_tp_umap_p <span class="ot">&lt;-</span> <span class="fu">plotUmap</span>(cm2_merged, <span class="at">label =</span> <span class="st">&#39;timepoint&#39;</span>)</span></code></pre></div>
+<pre><code>## Plotting Umap.</code></pre>
+<pre><code>## Coloring by: timepoint.</code></pre>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb422-1"><a href="cm1-and-cm2.html#cb422-1" aria-hidden="true" tabindex="-1"></a>cm2_merged_tp_umap_p</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm2_merge-2.png" width="672" /></p>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb423-1"><a href="cm1-and-cm2.html#cb423-1" aria-hidden="true" tabindex="-1"></a>cm2_merged_umap_p <span class="ot">&lt;-</span> <span class="fu">plotUmap</span>(cm2_merged, <span class="at">label =</span> <span class="st">&#39;subclones&#39;</span>)</span></code></pre></div>
+<pre><code>## Plotting Umap.</code></pre>
+<pre><code>## Coloring by: subclones.</code></pre>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb426-1"><a href="cm1-and-cm2.html#cb426-1" aria-hidden="true" tabindex="-1"></a>cm2_merged_umap_p</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm2_merge-3.png" width="672" /></p>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb427-1"><a href="cm1-and-cm2.html#cb427-1" aria-hidden="true" tabindex="-1"></a>cm2_merged <span class="ot">&lt;-</span> <span class="fu">calcConsensus</span>(cm2_merged)</span>
+<span id="cb427-2"><a href="cm1-and-cm2.html#cb427-2" aria-hidden="true" tabindex="-1"></a>cm2_merged <span class="ot">&lt;-</span> <span class="fu">runConsensusPhylo</span>(cm2_merged)</span>
+<span id="cb427-3"><a href="cm1-and-cm2.html#cb427-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-4"><a href="cm1-and-cm2.html#cb427-4" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cm2_merged)<span class="sc">$</span>timepoint <span class="ot">&lt;-</span></span>
+<span id="cb427-5"><a href="cm1-and-cm2.html#cb427-5" aria-hidden="true" tabindex="-1"></a>  forcats<span class="sc">::</span><span class="fu">fct_relevel</span>(<span class="fu">colData</span>(cm2_merged)<span class="sc">$</span>timepoint,</span>
+<span id="cb427-6"><a href="cm1-and-cm2.html#cb427-6" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">c</span>(<span class="st">&quot;primary&quot;</span>, <span class="st">&quot;metastasis&quot;</span>))</span>
+<span id="cb427-7"><a href="cm1-and-cm2.html#cb427-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-8"><a href="cm1-and-cm2.html#cb427-8" aria-hidden="true" tabindex="-1"></a>cm2_selected_genes <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb427-9"><a href="cm1-and-cm2.html#cb427-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;IGF1R&quot;</span>,</span>
+<span id="cb427-10"><a href="cm1-and-cm2.html#cb427-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;SMAD6&quot;</span>,</span>
+<span id="cb427-11"><a href="cm1-and-cm2.html#cb427-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;FGFR2&quot;</span>,</span>
+<span id="cb427-12"><a href="cm1-and-cm2.html#cb427-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;STAT3&quot;</span>,</span>
+<span id="cb427-13"><a href="cm1-and-cm2.html#cb427-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;SOX9&quot;</span>,</span>
+<span id="cb427-14"><a href="cm1-and-cm2.html#cb427-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;KLF5&quot;</span>,</span>
+<span id="cb427-15"><a href="cm1-and-cm2.html#cb427-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;FGF9&quot;</span>,</span>
+<span id="cb427-16"><a href="cm1-and-cm2.html#cb427-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;MSH2&quot;</span>,</span>
+<span id="cb427-17"><a href="cm1-and-cm2.html#cb427-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;APC&quot;</span>,</span>
+<span id="cb427-18"><a href="cm1-and-cm2.html#cb427-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;TP53&quot;</span>,</span>
+<span id="cb427-19"><a href="cm1-and-cm2.html#cb427-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;TNFRSF6B&quot;</span>,</span>
+<span id="cb427-20"><a href="cm1-and-cm2.html#cb427-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;CHEK2&quot;</span>,</span>
+<span id="cb427-21"><a href="cm1-and-cm2.html#cb427-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;MAP3K8&quot;</span></span>
+<span id="cb427-22"><a href="cm1-and-cm2.html#cb427-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb427-23"><a href="cm1-and-cm2.html#cb427-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb427-24"><a href="cm1-and-cm2.html#cb427-24" aria-hidden="true" tabindex="-1"></a>cm2_merged_selected_hvg_gc <span class="ot">&lt;-</span></span>
+<span id="cb427-25"><a href="cm1-and-cm2.html#cb427-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotGeneCopy</span>(cm2_merged,</span>
+<span id="cb427-26"><a href="cm1-and-cm2.html#cb427-26" aria-hidden="true" tabindex="-1"></a>               <span class="at">genes =</span> cm2_selected_genes,</span>
+<span id="cb427-27"><a href="cm1-and-cm2.html#cb427-27" aria-hidden="true" tabindex="-1"></a>               <span class="at">label =</span> <span class="st">&#39;timepoint&#39;</span>,</span>
+<span id="cb427-28"><a href="cm1-and-cm2.html#cb427-28" aria-hidden="true" tabindex="-1"></a>               <span class="at">dodge.width =</span> .<span class="dv">8</span>) <span class="sc">+</span> <span class="fu">scale_fill_hue</span>(<span class="at">direction =</span> <span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<pre><code>## Coloring by: timepoint</code></pre>
+<pre><code>## Warning in find_scaffold_genes(scCNA, genes = genes): Genes: TNFRSF6B are in excluded regions of the Varbin pipeline and
+## can&#39;t be plotted.</code></pre>
+<pre><code>## Scale for &#39;fill&#39; is already present. Adding another scale for &#39;fill&#39;, which will replace the existing scale.</code></pre>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb431-1"><a href="cm1-and-cm2.html#cb431-1" aria-hidden="true" tabindex="-1"></a>cm2_merged_selected_hvg_gc</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm2_merge-4.png" width="672" /></p>
+<p>To root the tree, we will use an inferred Most Recent Common Ancestral from the primary tumor and provide that as an argument to the runConsensusPhylo function.
+This consensus tree will be used by plotHeatmap to order the subclones on the plot</p>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb432-1"><a href="cm1-and-cm2.html#cb432-1" aria-hidden="true" tabindex="-1"></a><span class="co"># clustering and inferring the MRCA from the clusters</span></span>
+<span id="cb432-2"><a href="cm1-and-cm2.html#cb432-2" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> <span class="fu">runUmap</span>(cm2_tumor_primary)</span></code></pre></div>
+<pre><code>## Using assay: logr</code></pre>
+<pre><code>## Embedding data with UMAP. Using seed 17</code></pre>
+<pre><code>## Access reduced dimensions slot with: SingleCellExperiment::reducedDim(scCNA, &#39;umap&#39;).</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb437"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb437-1"><a href="cm1-and-cm2.html#cb437-1" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> <span class="fu">findSuggestedK</span>(cm2_tumor_primary)</span></code></pre></div>
+<pre><code>## Calculating jaccard similarity for k range: 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30</code></pre>
+<pre><code>## </code></pre>
+<pre><code>## Suggested k = 29 with median jaccard similarity of: 0.933</code></pre>
+<div class="sourceCode" id="cb441"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb441-1"><a href="cm1-and-cm2.html#cb441-1" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> <span class="fu">findClusters</span>(cm2_tumor_primary)</span></code></pre></div>
+<pre><code>## Using suggested k_subclones = 29</code></pre>
+<pre><code>## Finding clusters, using method: hdbscan</code></pre>
+<pre><code>## Found 22 outliers cells (group &#39;c0&#39;)</code></pre>
+<pre><code>## Found 7 subclones.</code></pre>
+<pre><code>## Done.</code></pre>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb447-1"><a href="cm1-and-cm2.html#cb447-1" aria-hidden="true" tabindex="-1"></a><span class="co"># HDBSCAN is an outlier aware clustering algorithm</span></span>
+<span id="cb447-2"><a href="cm1-and-cm2.html#cb447-2" aria-hidden="true" tabindex="-1"></a><span class="co"># in this analysis all cells marked as outliers (c0) from hdbscan are excluded.</span></span>
+<span id="cb447-3"><a href="cm1-and-cm2.html#cb447-3" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span></span>
+<span id="cb447-4"><a href="cm1-and-cm2.html#cb447-4" aria-hidden="true" tabindex="-1"></a>  cm2_tumor_primary[, <span class="fu">colData</span>(cm2_tumor_primary)<span class="sc">$</span>subclones <span class="sc">!=</span> <span class="st">&#39;c0&#39;</span>]</span>
+<span id="cb447-5"><a href="cm1-and-cm2.html#cb447-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb447-6"><a href="cm1-and-cm2.html#cb447-6" aria-hidden="true" tabindex="-1"></a><span class="co"># calculating the consensus of the Merged dataset and using the inferred</span></span>
+<span id="cb447-7"><a href="cm1-and-cm2.html#cb447-7" aria-hidden="true" tabindex="-1"></a><span class="co"># primary MRCA as the root of the tree</span></span>
+<span id="cb447-8"><a href="cm1-and-cm2.html#cb447-8" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> <span class="fu">calcConsensus</span>(cm2_tumor_primary)</span>
+<span id="cb447-9"><a href="cm1-and-cm2.html#cb447-9" aria-hidden="true" tabindex="-1"></a>cm2_tumor_primary <span class="ot">&lt;-</span> <span class="fu">inferMrca</span>(cm2_tumor_primary, <span class="at">value =</span> <span class="fl">0.8</span>)</span>
+<span id="cb447-10"><a href="cm1-and-cm2.html#cb447-10" aria-hidden="true" tabindex="-1"></a>cm2_merged <span class="ot">&lt;-</span> <span class="fu">runConsensusPhylo</span>(</span>
+<span id="cb447-11"><a href="cm1-and-cm2.html#cb447-11" aria-hidden="true" tabindex="-1"></a>  cm2_merged,</span>
+<span id="cb447-12"><a href="cm1-and-cm2.html#cb447-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">root =</span> <span class="st">&#39;user&#39;</span>,</span>
+<span id="cb447-13"><a href="cm1-and-cm2.html#cb447-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">root_user =</span> <span class="fu">metadata</span>(cm2_tumor_primary)<span class="sc">$</span>inferred_mrca</span>
+<span id="cb447-14"><a href="cm1-and-cm2.html#cb447-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb447-15"><a href="cm1-and-cm2.html#cb447-15" aria-hidden="true" tabindex="-1"></a><span class="fu">consensusPhylo</span>(cm2_merged) <span class="ot">&lt;-</span> phytools<span class="sc">::</span><span class="fu">rotateNodes</span>(<span class="fu">consensusPhylo</span>(cm2_merged), <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">27</span>))</span>
+<span id="cb447-16"><a href="cm1-and-cm2.html#cb447-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb447-17"><a href="cm1-and-cm2.html#cb447-17" aria-hidden="true" tabindex="-1"></a><span class="co"># relevel factors to plot in the desired order</span></span>
+<span id="cb447-18"><a href="cm1-and-cm2.html#cb447-18" aria-hidden="true" tabindex="-1"></a><span class="fu">colData</span>(cm2_merged)<span class="sc">$</span>timepoint <span class="ot">&lt;-</span></span>
+<span id="cb447-19"><a href="cm1-and-cm2.html#cb447-19" aria-hidden="true" tabindex="-1"></a>  forcats<span class="sc">::</span><span class="fu">fct_relevel</span>(<span class="fu">colData</span>(cm2_merged)<span class="sc">$</span>timepoint,</span>
+<span id="cb447-20"><a href="cm1-and-cm2.html#cb447-20" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">c</span>(<span class="st">&quot;metastasis&quot;</span>, <span class="st">&quot;primary&quot;</span>))</span>
+<span id="cb447-21"><a href="cm1-and-cm2.html#cb447-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb447-22"><a href="cm1-and-cm2.html#cb447-22" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting the phylogeny with subclones labels and pie charts</span></span>
+<span id="cb447-23"><a href="cm1-and-cm2.html#cb447-23" aria-hidden="true" tabindex="-1"></a><span class="co">#indicating the frequency of each timepoint</span></span>
+<span id="cb447-24"><a href="cm1-and-cm2.html#cb447-24" aria-hidden="true" tabindex="-1"></a>cm2_merged_consensus_phylo <span class="ot">&lt;-</span></span>
+<span id="cb447-25"><a href="cm1-and-cm2.html#cb447-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotPhylo</span>(cm2_merged,</span>
+<span id="cb447-26"><a href="cm1-and-cm2.html#cb447-26" aria-hidden="true" tabindex="-1"></a>            <span class="at">label =</span> <span class="st">&#39;subclones&#39;</span>,</span>
+<span id="cb447-27"><a href="cm1-and-cm2.html#cb447-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">consensus =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb447-28"><a href="cm1-and-cm2.html#cb447-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">group =</span> <span class="st">&#39;timepoint&#39;</span>)</span>
+<span id="cb447-29"><a href="cm1-and-cm2.html#cb447-29" aria-hidden="true" tabindex="-1"></a>cm2_merged_consensus_phylo</span></code></pre></div>
+<p><img src="_main_files/figure-html/cm2_tree-1.png" width="672" /></p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb448-1"><a href="cm1-and-cm2.html#cb448-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotHeatmap</span>(cm2_merged, <span class="at">label =</span> <span class="fu">c</span>(<span class="st">&#39;subclones&#39;</span>, <span class="st">&#39;timepoint&#39;</span>))</span></code></pre></div>
+<pre><code>## Plotting Heatmap.</code></pre>
+<pre><code>## The automatically generated colors map from the minus and plus 99^th of the absolute values in the matrix.
+## There are outliers in the matrix whose patterns might be hidden by this color mapping. You can manually set
+## the color to `col` argument.
+## 
+## Use `suppressMessages()` to turn off this message.</code></pre>
+<p><img src="_main_files/figure-html/cm2_heatmap-1.png" width="768" /></p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r bg-success"><code class="sourceCode r"><span id="cb451-1"><a href="cm1-and-cm2.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotHeatmap</span>(</span>
+<span id="cb451-2"><a href="cm1-and-cm2.html#cb451-2" aria-hidden="true" tabindex="-1"></a>  cm2_merged,</span>
+<span id="cb451-3"><a href="cm1-and-cm2.html#cb451-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="fu">c</span>(<span class="st">&#39;subclones&#39;</span>),</span>
+<span id="cb451-4"><a href="cm1-and-cm2.html#cb451-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">consensus =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb451-5"><a href="cm1-and-cm2.html#cb451-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">genes =</span> cm2_selected_genes</span>
+<span id="cb451-6"><a href="cm1-and-cm2.html#cb451-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Warning in find_scaffold_genes(scCNA, genes): Genes: TNFRSF6B are in excluded regions of the Varbin pipeline and can&#39;t be
+## plotted.</code></pre>
+<pre><code>## Plotting Heatmap.</code></pre>
+<p><img src="_main_files/figure-html/cm2_consensus_heatmap-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="bm1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="session-info.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/navinlabcode/copykit/blob/master/04-CM1_CM2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+--- 
+title: "CopyKit Manuscript Code"
+author: "Darlan Conterno Minussi"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is the code from the figures presented in the CopyKit manuscript - 
+  Resolving clonal substructure from single cell genomic data using CopyKit.
+link-citations: yes
+github-repo: navinlabcode/copykit
+---
+
+# About
+
+This is the code to reproduce the figures presented in the CopyKit manuscript -  **Resolving clonal substructure from single cell genomic data using CopyKit**.
+
+You can find instructions on how to install CopyKit here: https://github.com/navinlabcode/copykit
+
+Files used for this project are deposited to the sequence read archive (SRA) under BioProject PRJNA785341.

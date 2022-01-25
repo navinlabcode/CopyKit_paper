@@ -1,0 +1,6 @@
+datasets/
+.DS_Store
+.Rbuildignore
+.Rproj.user/
+.Rproj
+._.DS_Store

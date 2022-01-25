@@ -1,14 +1,37 @@
-Welcome! 
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-This template provides a skeleton file structure that you can edit to create your book. 
+# CopyKit Paper
 
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
+<!-- badges: start -->
+<!-- badges: end -->
 
-Additional resources:
+This repository contains the scripts to reproduce the figures for the
+CopyKit manuscript. **Resolving clonal substructure from single cell
+genomic data using CopyKit**
 
-The **bookdown** book: https://bookdown.org/yihui/bookdown/
+## Manuscript Code
 
-The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown
-# CopyKit_paper
+Code to reproduce figures from the manuscript can be found here:
+<https://navinlabcode.github.io/CopyKit_paper/>
+
+## CopyKit installation
+
+You can install the development version of CopyKit from github with:
+
+``` r
+devtools::install_github("navinlabcode/copykit")
+```
+
+Please check CopyKit package GitHub repository as well:
+<https://github.com/navinlabcode/copykit>
+
+## Documentation
+
+CopyKit complete documentation can be found here:
+<https://navinlabcode.github.io/CopyKit-UserGuide/>
+
+## Datasets
+
+Files used for this project are deposited to the sequence read archive
+(SRA) under BioProject PRJNA785341.

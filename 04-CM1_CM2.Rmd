@@ -1,0 +1,304 @@
+---
+title: ""
+output: html_document
+editor_options:
+  chunk_output_type: console
+---
+
+# CM1 and CM2
+
+## CM1
+
+## CM1 colon
+```{r cm1_primary, class.source="bg-success"}
+# Running data with CopyKit for the primary colon sample
+cm1_tumor_primary <- runVarbin("/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/CM1/colon/marked_bams", remove_Y = TRUE)
+
+# Finding diploid and low-quality cells and excluding it from the copykit object
+cm1_tumor_primary <- findOutliers(cm1_tumor_primary)
+cm1_tumor_primary <- findAneuploidCells(cm1_tumor_primary)
+
+cm1_tumor_primary <- cm1_tumor_primary[,colData(cm1_tumor_primary)$outlier == FALSE]
+cm1_tumor_primary <- cm1_tumor_primary[,colData(cm1_tumor_primary)$is_aneuploid == TRUE]
+
+# Adding the tissue information to colData
+colData(cm1_tumor_primary)$timepoint <- 'primary'
+```
+
+## CM1 liver
+``` {r cm1_met, class.source="bg-success"}
+# Running data with CopyKit for the liver sample
+cm1_tumor_met <-
+  runVarbin(
+    "/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/CM1/liver/marked_bams",
+    remove_Y = TRUE
+  )
+
+# Finding diploid and low-quality cells and excluding it from the copykit object
+cm1_tumor_met <- findOutliers(cm1_tumor_met)
+cm1_tumor_met <- findAneuploidCells(cm1_tumor_met)
+
+cm1_tumor_met <-
+  cm1_tumor_met[, colData(cm1_tumor_met)$outlier == FALSE]
+cm1_tumor_met <-
+  cm1_tumor_met[, colData(cm1_tumor_met)$is_aneuploid == TRUE]
+
+# Adding the tissue information to colData
+colData(cm1_tumor_met)$timepoint <- 'metastasis'
+```
+
+## CM1 merging
+``` {r cm1_merge, class.source="bg-success"}
+# Merging the three copykit objects
+cm1_merged <- cbind(cm1_tumor_primary,
+                    cm1_tumor_met)
+
+cm1_merged <- runUmap(cm1_merged)
+
+cm1_merged <- findSuggestedK(cm1_merged)
+cm1_merged_suggestedk <- plotSuggestedK(cm1_merged)
+cm1_merged_suggestedk
+
+cm1_merged <- findClusters(cm1_merged)
+
+# HDBSCAN is an outlier aware clustering algorithm
+# in this analysis all cells marked as outliers (c0) from hdbscan are excluded.
+cm1_merged <- cm1_merged[, colData(cm1_merged)$subclones != 'c0']
+
+cm1_merged_tp_umap_p <- plotUmap(cm1_merged, label = 'timepoint')
+cm1_merged_tp_umap_p
+
+cm1_merged_umap_p <- plotUmap(cm1_merged, label = 'subclones')
+cm1_merged_umap_p
+
+cm1_merged <- calcConsensus(cm1_merged)
+cm1_merged <- runConsensusPhylo(cm1_merged)
+
+colData(cm1_merged)$timepoint <-
+  forcats::fct_relevel(colData(cm1_merged)$timepoint,
+                       c("primary", "metastasis"))
+
+cm1_selected_genes = c(
+  "SMAD3",
+  "FHIT",
+  "APC",
+  "SOX4",
+  "IGFBP7",
+  "CDK8",
+  "PIK3CA",
+  "MYC",
+  'TP53',
+  "GATA4",
+  "CHEK1",
+  "TGFB1",
+  "TIAM1"
+)
+
+cm1_merged_selected_hvg_gc <-
+  plotGeneCopy(cm1_merged,
+               genes = cm1_selected_genes,
+               label = 'timepoint',
+               dodge.width = .8) + scale_fill_hue(direction = -1)
+cm1_merged_selected_hvg_gc
+```
+
+To root the tree, we will use an inferred Most Recent Common Ancestral from the primary tumor and provide that as an argument to the runConsensusPhylo function.
+This consensus tree will be used by plotHeatmap to order the subclones on the plot
+``` {r cm1_tree, class.source="bg-success"}
+# clustering and inferring the MRCA from the clusters
+cm1_tumor_primary <- runUmap(cm1_tumor_primary)
+cm1_tumor_primary <- findSuggestedK(cm1_tumor_primary)
+cm1_tumor_primary <- findClusters(cm1_tumor_primary)
+
+# HDBSCAN is an outlier aware clustering algorithm
+# in this analysis all cells marked as outliers (c0) from hdbscan are excluded.
+cm1_tumor_primary <-
+  cm1_tumor_primary[, colData(cm1_tumor_primary)$subclones != 'c0']
+
+
+# calculating the consensus of the Merged dataset and using the inferred
+# primary MRCA as the root of the tree
+cm1_tumor_primary <- calcConsensus(cm1_tumor_primary)
+cm1_tumor_primary <- inferMrca(cm1_tumor_primary)
+cm1_merged <- runConsensusPhylo(
+  cm1_merged,
+  root = 'user',
+  root_user = metadata(cm1_tumor_primary)$inferred_mrca
+)
+
+# relevel factors to plot in the desired order
+colData(cm1_merged)$timepoint <-
+  forcats::fct_relevel(colData(cm1_merged)$timepoint,
+                       c("metastasis", "primary"))
+
+# plotting the phylogeny with subclones labels and pie charts
+#indicating the frequency of each timepoint
+cm1_merged_consensus_phylo <-
+  plotPhylo(cm1_merged,
+            label = 'subclones',
+            consensus = TRUE,
+            group = 'timepoint')
+cm1_merged_consensus_phylo
+```
+
+``` {r cm1_heatmap, fig.width = 8, fig.height = 9, class.source="bg-success"}
+plotHeatmap(cm1_merged, label = c('subclones', 'timepoint'))
+```
+
+```{r cm1_consensus_heatmap, class.source="bg-success"}
+plotHeatmap(
+  cm1_merged,
+  label = c('subclones'),
+  consensus = TRUE,
+  genes = cm1_selected_genes
+)
+```
+
+
+## CM2
+
+## CM2 colon
+```{r cm2_primary, class.source="bg-success"}
+# Running data with CopyKit for the primary colon sample
+cm2_tumor_primary <- runVarbin("/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/CM2/colon/marked_bams", remove_Y = TRUE)
+
+# Finding diploid and low-quality cells and excluding it from the copykit object
+cm2_tumor_primary <- findOutliers(cm2_tumor_primary)
+cm2_tumor_primary <- findAneuploidCells(cm2_tumor_primary)
+
+cm2_tumor_primary <- cm2_tumor_primary[,colData(cm2_tumor_primary)$outlier == FALSE]
+cm2_tumor_primary <- cm2_tumor_primary[,colData(cm2_tumor_primary)$is_aneuploid == TRUE]
+
+# Adding the tissue information to colData
+colData(cm2_tumor_primary)$timepoint <- 'primary'
+```
+
+## CM2 liver
+``` {r cm2_met, class.source="bg-success"}
+# Running data with CopyKit for the liver sample
+cm2_tumor_met <-
+  runVarbin(
+    "/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/CM2/liver/marked_bams",
+    remove_Y = TRUE
+  )
+
+# Finding diploid and low-quality cells and excluding it from the copykit object
+cm2_tumor_met <- findOutliers(cm2_tumor_met)
+cm2_tumor_met <- findAneuploidCells(cm2_tumor_met)
+
+cm2_tumor_met <-
+  cm2_tumor_met[, colData(cm2_tumor_met)$outlier == FALSE]
+cm2_tumor_met <-
+  cm2_tumor_met[, colData(cm2_tumor_met)$is_aneuploid == TRUE]
+
+# Adding the tissue information to colData
+colData(cm2_tumor_met)$timepoint <- 'metastasis'
+```
+
+## CM2 merging
+``` {r cm2_merge, class.source="bg-success"}
+# Merging the three copykit objects
+cm2_merged <- cbind(cm2_tumor_primary,
+                    cm2_tumor_met)
+
+cm2_merged <- runUmap(cm2_merged)
+
+cm2_merged <- findSuggestedK(cm2_merged)
+cm2_merged_suggestedk <- plotSuggestedK(cm2_merged)
+cm2_merged_suggestedk
+
+cm2_merged <- findClusters(cm2_merged)
+
+# HDBSCAN is an outlier aware clustering algorithm
+# in this analysis all cells marked as outliers (c0) from hdbscan are excluded.
+cm2_merged <- cm2_merged[, colData(cm2_merged)$subclones != 'c0']
+
+cm2_merged_tp_umap_p <- plotUmap(cm2_merged, label = 'timepoint')
+cm2_merged_tp_umap_p
+
+cm2_merged_umap_p <- plotUmap(cm2_merged, label = 'subclones')
+cm2_merged_umap_p
+
+cm2_merged <- calcConsensus(cm2_merged)
+cm2_merged <- runConsensusPhylo(cm2_merged)
+
+colData(cm2_merged)$timepoint <-
+  forcats::fct_relevel(colData(cm2_merged)$timepoint,
+                       c("primary", "metastasis"))
+
+cm2_selected_genes = c(
+  "IGF1R",
+  "SMAD6",
+  "FGFR2",
+  "STAT3",
+  "SOX9",
+  "KLF5",
+  "FGF9",
+  "MSH2",
+  "APC",
+  "TP53",
+  "TNFRSF6B",
+  "CHEK2",
+  "MAP3K8"
+)
+
+cm2_merged_selected_hvg_gc <-
+  plotGeneCopy(cm2_merged,
+               genes = cm2_selected_genes,
+               label = 'timepoint',
+               dodge.width = .8) + scale_fill_hue(direction = -1)
+cm2_merged_selected_hvg_gc
+```
+
+To root the tree, we will use an inferred Most Recent Common Ancestral from the primary tumor and provide that as an argument to the runConsensusPhylo function.
+This consensus tree will be used by plotHeatmap to order the subclones on the plot
+``` {r cm2_tree, class.source="bg-success"}
+# clustering and inferring the MRCA from the clusters
+cm2_tumor_primary <- runUmap(cm2_tumor_primary)
+cm2_tumor_primary <- findSuggestedK(cm2_tumor_primary)
+cm2_tumor_primary <- findClusters(cm2_tumor_primary)
+
+# HDBSCAN is an outlier aware clustering algorithm
+# in this analysis all cells marked as outliers (c0) from hdbscan are excluded.
+cm2_tumor_primary <-
+  cm2_tumor_primary[, colData(cm2_tumor_primary)$subclones != 'c0']
+
+# calculating the consensus of the Merged dataset and using the inferred
+# primary MRCA as the root of the tree
+cm2_tumor_primary <- calcConsensus(cm2_tumor_primary)
+cm2_tumor_primary <- inferMrca(cm2_tumor_primary, value = 0.8)
+cm2_merged <- runConsensusPhylo(
+  cm2_merged,
+  root = 'user',
+  root_user = metadata(cm2_tumor_primary)$inferred_mrca
+)
+consensusPhylo(cm2_merged) <- phytools::rotateNodes(consensusPhylo(cm2_merged), c(25, 27))
+
+# relevel factors to plot in the desired order
+colData(cm2_merged)$timepoint <-
+  forcats::fct_relevel(colData(cm2_merged)$timepoint,
+                       c("metastasis", "primary"))
+
+# plotting the phylogeny with subclones labels and pie charts
+#indicating the frequency of each timepoint
+cm2_merged_consensus_phylo <-
+  plotPhylo(cm2_merged,
+            label = 'subclones',
+            consensus = TRUE,
+            group = 'timepoint')
+cm2_merged_consensus_phylo
+```
+
+``` {r cm2_heatmap, fig.width = 8, fig.height = 9, class.source="bg-success"}
+plotHeatmap(cm2_merged, label = c('subclones', 'timepoint'))
+```
+
+```{r cm2_consensus_heatmap, class.source="bg-success"}
+plotHeatmap(
+  cm2_merged,
+  label = c('subclones'),
+  consensus = TRUE,
+  genes = cm2_selected_genes
+)
+```
+

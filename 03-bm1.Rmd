@@ -1,0 +1,215 @@
+---
+title: "BM1"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+The following code analysis the breast metastatic sample with metastasis to the liver and to the pleural effusion.
+This works as an example on how to employ CopyKit for the analysis of multiple datasets.
+
+# BM1
+
+## Reading datasets
+``` {r bm1_data, class.source="bg-success"}
+# Running data with CopyKit for the primary breast sample
+bm1_breast <-
+  runVarbin(
+    "/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/BM1/breast/marked_bams/",
+    remove_Y = TRUE
+  )
+
+# Finding diploid and low-quality cells and excluding it from the copykit object
+bm1_breast <- findOutliers(bm1_breast, resolution = 0.8)
+bm1_breast <- findAneuploidCells(bm1_breast)
+
+bm1_breast <- bm1_breast[, colData(bm1_breast)$outlier == FALSE]
+bm1_breast <- bm1_breast[, colData(bm1_breast)$is_aneuploid == TRUE]
+
+# Adding the tissue information to colData
+colData(bm1_breast)$timepoint <- 'breast'
+
+# ~~~~~~~~~~~~~~~~~~~~~~~
+
+# Running data with CopyKit for the liver metastasis sample
+bm1_liver <-
+  runVarbin(
+    "/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/BM1/liver/marked_bams/",
+    remove_Y = TRUE
+  )
+
+# Finding diploid and low-quality cells and excluding it from the copykit object
+bm1_liver <- findOutliers(bm1_liver)
+bm1_liver <- findAneuploidCells(bm1_liver)
+
+bm1_liver <- bm1_liver[, colData(bm1_liver)$outlier == FALSE]
+bm1_liver <- bm1_liver[, colData(bm1_liver)$is_aneuploid == TRUE]
+
+# Adding the tissue information to colData
+colData(bm1_liver)$timepoint <- 'liver'
+
+# Running data with CopyKit for the pleural effusion metastasis sample
+bm1_pleural <-
+  runVarbin(
+    "/mnt/lab/users/dminussi/projects/CopyKit_Manuscript_Code/datasets/BM1/pleural/marked_bams/",
+    remove_Y = TRUE
+  )
+
+# Finding diploid and low-quality cells and excluding it from the copykit object
+bm1_pleural <- findOutliers(bm1_pleural)
+bm1_pleural <- findAneuploidCells(bm1_pleural)
+
+bm1_pleural <- bm1_pleural[, colData(bm1_pleural)$outlier == FALSE]
+bm1_pleural <-
+  bm1_pleural[, colData(bm1_pleural)$is_aneuploid == TRUE]
+
+# Adding the tissue information to colData
+colData(bm1_pleural)$timepoint <- 'pleural'
+```
+
+Merging the three datasets
+``` {r bm1_merging, class.source="bg-success"}
+# Merging the three copykit objects
+bm1_merged <- cbind(bm1_breast,
+                    bm1_liver,
+                    bm1_pleural)
+
+```
+
+From here on the analysis follow the same steps as a standard CopyKit workflow analysis.
+
+## Running UMAP and Clustering
+``` {r bm1_umap_cl, class.source="bg-success"}
+bm1_merged <- runUmap(bm1_merged)
+
+bm1_merged <- findSuggestedK(bm1_merged)
+bm1_merged_suggestedk <- plotSuggestedK(bm1_merged)
+bm1_merged_suggestedk
+
+bm1_merged <- findClusters(bm1_merged)
+
+bm1_merged <- calcConsensus(bm1_merged)
+bm1_merged <- runConsensusPhylo(bm1_merged)
+
+plotHeatmap(bm1_merged, label = c('subclones', 'timepoint'))
+
+bm1_merged_umap_p <- plotUmap(bm1_merged, label = 'subclones')
+bm1_merged_umap_p
+
+# Cluster c3 from the pleural sample is a cluster of tumor-normal doublets
+# We can subset out of the CopyKit object in a similar way to the filtering
+# functions with the information from colData
+bm1_merged <- bm1_merged[, colData(bm1_merged)$subclones != 'c3']
+
+# Re-clustering the sample after doublet removal
+# This sample has a smaller sample size, therefore we are reducing the
+# n_neighbors parameter from the UMAP
+bm1_merged <- runUmap(bm1_merged, n_neighbors = 20)
+
+# Grid Search of Jaccard Similarity (cluster stability)
+bm1_merged <- findSuggestedK(bm1_merged)
+bm1_merged <- findClusters(bm1_merged)
+
+# Plotting the UMAP colored by the tissue of origin from the colData information
+bm1_merged_tp_umap_p <- plotUmap(bm1_merged, label = 'timepoint')
+bm1_merged_tp_umap_p
+
+# Plotting the UMAP colored by the subclones from the colData information
+bm1_merged_umap_p <- plotUmap(bm1_merged, label = 'subclones')
+bm1_merged_umap_p
+```
+
+## Consensus tree
+
+To root the tree, we will use an inferred Most Recent Common Ancestral from the primary tumor and provide that as an argument to the runConsensusPhylo function.
+This consensus tree will be used by plotHeatmap to order the subclones on the plot
+``` {r bm1_tree, class.source="bg-success"}
+# The primary sample per se has very few cells so we will add a subclone 
+# information to the colData to use the later functions in CopyKit
+colData(bm1_breast)$subclones <- 'c1'
+bm1_breast <- calcConsensus(bm1_breast)
+
+# Inferring the MRCA on the primary breast sample
+bm1_breast <- inferMrca(bm1_breast)
+
+# calculating the consensus of the Merged dataset and using the inferred 
+# primary MRCA as the root of the tree
+bm1_merged <- calcConsensus(bm1_merged)
+bm1_merged <- runConsensusPhylo(bm1_merged,
+                                root = 'user',
+                                root_user = metadata(bm1_breast)$inferred_mrca)
+# Rotating branches
+consensusPhylo(bm1_merged) <-
+  ape::rotate(consensusPhylo(bm1_merged), 6)
+consensusPhylo(bm1_merged) <-
+  ape::rotate(consensusPhylo(bm1_merged), 7)
+
+bm1_merged_consensus_phylo <-
+  plotPhylo(bm1_merged, label = 'subclones', consensus = TRUE)
+bm1_merged_consensus_phylo
+
+# Calculating cophenetic distances between subclones
+ape::cophenetic.phylo(consensusPhylo(bm1_merged))
+```
+
+``` {r bm1_heatmap, fig.width = 8, fig.height = 9, class.source="bg-success"}
+# Plotting the copy number heatmap with annotation data from the subclones and
+# the tissue of origin
+plotHeatmap(bm1_merged, label = c('subclones', 'timepoint'))
+```
+
+``` {r bm1_consensus_heatmap_genes, fig.width = 9, class.source="bg-success"}
+# Plotting a consensus heatmap with the plotHeatmap function. 
+# The annotation represents the subclones and relevant cancer genes are marked.
+plotHeatmap(
+  bm1_merged,
+  label = 'subclones',
+  consensus = TRUE,
+  genes = c(
+    "MYC",
+    "MYB",
+    "BRCA1",
+    "ERBB2",
+    "CDH1",
+    "FGFR1",
+    "AKT2",
+    "CDK4",
+    "CCNE1",
+    "CCND1",
+    "MTOR",
+    "FGF10",
+    "BRAF",
+    "AURKA"
+  )
+)
+
+# Using the plotGeneCopy function to plot the segment ratios mean values for 
+# the selected genes and coloring it by the tissue of origin from the metadata
+bm1_merged_gc <-
+  plotGeneCopy(
+    bm1_merged,
+    genes = c(
+      "MYC",
+      "MYB",
+      "BRCA1",
+      "ERBB2",
+      "CDH1",
+      "FGFR1",
+      "AKT2",
+      "CDK4",
+      "CCNE1",
+      "CCND1",
+      "MTOR",
+      "FGF10",
+      "BRAF",
+      "AURKA"
+    ),
+    label = 'timepoint',
+    dodge.width = .8
+  ) +
+  scale_fill_hue()
+bm1_merged_gc
+```
+
+
+
