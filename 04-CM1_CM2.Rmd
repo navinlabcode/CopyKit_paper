@@ -272,7 +272,7 @@ cm2_merged <- runConsensusPhylo(
   root = 'user',
   root_user = metadata(cm2_tumor_primary)$inferred_mrca
 )
-consensusPhylo(cm2_merged) <- phytools::rotateNodes(consensusPhylo(cm2_merged), c(25, 27))
+consensusPhylo(cm2_merged) <- phytools::rotateNodes(consensusPhylo(cm2_merged), c(14))
 
 # relevel factors to plot in the desired order
 colData(cm2_merged)$timepoint <-

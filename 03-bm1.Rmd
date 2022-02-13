@@ -103,8 +103,8 @@ bm1_merged <- bm1_merged[, colData(bm1_merged)$subclones != 'c3']
 
 # Re-clustering the sample after doublet removal
 # This sample has a smaller sample size, therefore we are reducing the
-# n_neighbors parameter from the UMAP
-bm1_merged <- runUmap(bm1_merged, n_neighbors = 20)
+# n_neighbors parameter from the UMAP and increasing min_dist
+bm1_merged <- runUmap(bm1_merged, n_neighbors = 10, min_dist = 0.1)
 
 # Grid Search of Jaccard Similarity (cluster stability)
 bm1_merged <- findSuggestedK(bm1_merged)
@@ -125,7 +125,7 @@ To root the tree, we will use an inferred Most Recent Common Ancestral from the 
 This consensus tree will be used by plotHeatmap to order the subclones on the plot
 ``` {r bm1_tree, class.source="bg-success"}
 # The primary sample per se has very few cells so we will add a subclone 
-# information to the colData to use the later functions in CopyKit
+# information to the colData to use the later inferMrca function in CopyKit
 colData(bm1_breast)$subclones <- 'c1'
 bm1_breast <- calcConsensus(bm1_breast)
 
@@ -141,8 +141,6 @@ bm1_merged <- runConsensusPhylo(bm1_merged,
 # Rotating branches
 consensusPhylo(bm1_merged) <-
   ape::rotate(consensusPhylo(bm1_merged), 6)
-consensusPhylo(bm1_merged) <-
-  ape::rotate(consensusPhylo(bm1_merged), 7)
 
 bm1_merged_consensus_phylo <-
   plotPhylo(bm1_merged, label = 'subclones', consensus = TRUE)

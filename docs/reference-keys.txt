@@ -22,3 +22,8 @@ cm2-colon
 cm2-liver
 cm2-merging
 session-info
+copykit-paper
+manuscript-code
+copykit-installation
+documentation
+datasets
