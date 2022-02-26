@@ -20,3 +20,10 @@ This is the code to reproduce the figures presented in the CopyKit manuscript - 
 You can find instructions on how to install CopyKit here: https://github.com/navinlabcode/copykit
 
 Files used for this project are deposited to the sequence read archive (SRA) under BioProject PRJNA785341.
+
+Generated with CopyKit version:
+``` {r}
+packageVersion("copykit")
+```
+
+ 
