@@ -22,6 +22,7 @@ cm2-colon
 cm2-liver
 cm2-merging
 session-info
+dockerfile
 copykit-paper
 manuscript-code
 copykit-installation

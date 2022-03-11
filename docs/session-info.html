@@ -27,7 +27,7 @@ Resolving clonal substructure from single cell genomic data using CopyKit.</p>" 
 <meta name="author" content="Darlan Conterno Minussi" />
 
 
-<meta name="date" content="2022-02-25" />
+<meta name="date" content="2022-03-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -173,7 +173,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm2-liver"><i class="fa fa-check"></i><b>4.7</b> CM2 liver</a></li>
 <li class="chapter" data-level="4.8" data-path="cm1-and-cm2.html"><a href="cm1-and-cm2.html#cm2-merging"><i class="fa fa-check"></i><b>4.8</b> CM2 merging</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>5</b> Session Info</a></li>
+<li class="chapter" data-level="5" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>5</b> Session Info</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="session-info.html"><a href="session-info.html#dockerfile"><i class="fa fa-check"></i><b>5.1</b> Dockerfile</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="copykit-paper.html"><a href="copykit-paper.html"><i class="fa fa-check"></i><b>6</b> CopyKit Paper</a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="copykit-paper.html"><a href="copykit-paper.html#manuscript-code"><i class="fa fa-check"></i><b>6.1</b> Manuscript Code</a></li>
@@ -203,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="session-info" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Session Info</h1>
-<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="session-info.html#cb456-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="session-info.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.1.1 (2021-08-10)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 20.04.3 LTS
@@ -225,59 +228,114 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  [4] forcats_0.5.1               stringr_1.4.0               dplyr_1.0.7                
 ##  [7] purrr_0.3.4                 readr_2.0.2                 tidyr_1.1.4                
 ## [10] tibble_3.1.5                ggplot2_3.3.5               tidyverse_1.3.1            
-## [13] rstatix_0.7.0               patchwork_1.1.1             copykit_0.0.0.9043         
+## [13] rstatix_0.7.0               patchwork_1.1.1             copykit_0.1.0              
 ## [16] DNAcopy_1.68.0              Rsubread_2.8.1              SingleCellExperiment_1.16.0
 ## [19] SummarizedExperiment_1.24.0 Biobase_2.54.0              GenomicRanges_1.46.0       
 ## [22] GenomeInfoDb_1.30.0         IRanges_2.28.0              S4Vectors_0.32.2           
 ## [25] BiocGenerics_0.40.0         MatrixGenerics_1.6.0        matrixStats_0.61.0         
-## [28] bookdown_0.24              
+## [28] BiocParallel_1.28.0         bookdown_0.24               devtools_2.4.2             
+## [31] usethis_2.1.3              
 ## 
 ## loaded via a namespace (and not attached):
-##   [1] utf8_1.2.2              tidyselect_1.1.1        combinat_0.0-8          grid_4.1.1             
-##   [5] BiocParallel_1.28.0     devtools_2.4.2          munsell_0.5.0           codetools_0.2-18       
-##   [9] miniUI_0.1.1.1          withr_2.4.3             colorspace_2.0-2        highr_0.9              
-##  [13] knitr_1.36              ggalluvial_0.12.3       rstudioapi_0.13         robustbase_0.93-9      
-##  [17] labeling_0.4.2          GenomeInfoDbData_1.2.7  mnormt_2.0.2            farver_2.1.0           
-##  [21] rprojroot_2.0.2         coda_0.19-4             vctrs_0.3.8             treeio_1.18.0          
-##  [25] generics_0.1.1          clusterGeneration_1.3.7 xfun_0.28               fastcluster_1.2.3      
-##  [29] diptest_0.76-0          R6_2.5.1                doParallel_1.0.16       ggbeeswarm_0.6.0       
-##  [33] clue_0.3-60             flexmix_2.3-17          bitops_1.0-7            cachem_1.0.6           
-##  [37] gridGraphics_0.5-1      DelayedArray_0.20.0     assertthat_0.2.1        promises_1.2.0.1       
-##  [41] scales_1.1.1            nnet_7.3-16             beeswarm_0.4.0          gtable_0.3.0           
-##  [45] phangorn_2.7.1          processx_3.5.2          rlang_0.4.12            scatterplot3d_0.3-41   
-##  [49] GlobalOptions_0.1.2     splines_4.1.1           lazyeval_0.2.2          broom_0.7.10           
-##  [53] yaml_2.2.1              abind_1.4-5             modelr_0.1.8            ggimage_0.3.0          
-##  [57] backports_1.3.0         httpuv_1.6.3            tools_4.1.1             usethis_2.1.3          
-##  [61] ggplotify_0.1.0         ellipsis_0.3.2          jquerylib_0.1.4         RColorBrewer_1.1-2     
-##  [65] sessioninfo_1.2.1       Rcpp_1.0.7              zlibbioc_1.40.0         RCurl_1.98-1.5         
-##  [69] ps_1.6.0                prettyunits_1.1.1       dbscan_1.1-10           GetoptLong_1.0.5       
-##  [73] viridis_0.6.2           cowplot_1.1.1           haven_2.4.3             cluster_2.1.2          
-##  [77] fs_1.5.0                magrittr_2.0.1          RSpectra_0.16-0         magick_2.7.3           
-##  [81] circlize_0.4.13         reprex_2.0.1            tmvnsim_1.0-2           amap_0.8-18            
-##  [85] pkgload_1.2.3           hms_1.1.1               mime_0.12               evaluate_0.14          
-##  [89] xtable_1.8-4            mclust_5.4.7            readxl_1.3.1            gridExtra_2.3          
-##  [93] shape_1.4.6             testthat_3.1.0          compiler_4.1.1          maps_3.4.0             
-##  [97] crayon_1.4.2            htmltools_0.5.2         segmented_1.3-4         ggfun_0.0.4            
-## [101] later_1.3.0             tzdb_0.2.0              aplot_0.1.1             expm_0.999-6           
-## [105] lubridate_1.8.0         DBI_1.1.1               dbplyr_2.1.1            ComplexHeatmap_2.10.0  
-## [109] MASS_7.3-54             fpc_2.2-9               boot_1.3-28             Matrix_1.3-4           
-## [113] car_3.0-12              cli_3.1.0               quadprog_1.5-8          parallel_4.1.1         
-## [117] igraph_1.2.8            pkgconfig_2.0.3         numDeriv_2016.8-1.1     xml2_1.3.2             
-## [121] foreach_1.5.1           ggtree_3.2.0            vipor_0.4.5             bslib_0.3.1            
-## [125] XVector_0.34.0          rvest_1.0.2             snakecase_0.11.0        yulab.utils_0.0.4      
-## [129] callr_3.7.0             digest_0.6.28           phytools_0.7-90         fastmatch_1.1-3        
-## [133] rmarkdown_2.11          cellranger_1.1.0        tidytree_0.3.5          uwot_0.1.10            
-## [137] curl_4.3.2              kernlab_0.9-29          shiny_1.7.1             gtools_3.9.2           
-## [141] modeltools_0.2-23       rjson_0.2.20            lifecycle_1.0.1         nlme_3.1-153           
-## [145] jsonlite_1.7.2          carData_3.0-4           BiocNeighbors_1.12.0    desc_1.4.0             
-## [149] viridisLite_0.4.0       fansi_0.5.0             pillar_1.6.4            lattice_0.20-45        
-## [153] plotrix_3.8-2           fastmap_1.1.0           httr_1.4.2              DEoptimR_1.0-9         
-## [157] pkgbuild_1.2.0          survival_3.2-13         glue_1.4.2              remotes_2.4.1          
-## [161] FNN_1.1.3               png_0.1-7               prabclus_2.3-2          iterators_1.0.13       
-## [165] bluster_1.4.0           class_7.3-19            stringi_1.7.5           sass_0.4.0             
-## [169] mixtools_1.2.0          memoise_2.0.0           irlba_2.3.3             ape_5.5</code></pre>
+##   [1] prabclus_2.3-2          semver_0.2.0            coda_0.19-4             clusterGeneration_1.3.7
+##   [5] knitr_1.36              irlba_2.3.3             DelayedArray_0.20.0     RCurl_1.98-1.5         
+##   [9] doParallel_1.0.16       generics_0.1.1          callr_3.7.0             cowplot_1.1.1          
+##  [13] lambda.r_1.2.4          combinat_0.0-8          tzdb_0.2.0              xml2_1.3.2             
+##  [17] lubridate_1.8.0         httpuv_1.6.3            assertthat_0.2.1        viridis_0.6.2          
+##  [21] amap_0.8-18             xfun_0.28               hms_1.1.1               jquerylib_0.1.4        
+##  [25] evaluate_0.14           promises_1.2.0.1        DEoptimR_1.0-9          fansi_0.5.0            
+##  [29] dbplyr_2.1.1            readxl_1.3.1            igraph_1.2.8            DBI_1.1.1              
+##  [33] tmvnsim_1.0-2           futile.logger_1.4.3     ellipsis_0.3.2          RSpectra_0.16-0        
+##  [37] backports_1.3.0         vctrs_0.3.8             ggalluvial_0.12.3       remotes_2.4.1          
+##  [41] abind_1.4-5             cachem_1.0.6            withr_2.4.3             robustbase_0.93-9      
+##  [45] treeio_1.18.0           prettyunits_1.1.1       mclust_5.4.7            mnormt_2.0.2           
+##  [49] phytools_0.7-90         cluster_2.1.2           ape_5.5                 segmented_1.3-4        
+##  [53] lazyeval_0.2.2          crayon_1.4.2            versions_0.3            pkgconfig_2.0.3        
+##  [57] labeling_0.4.2          nlme_3.1-153            vipor_0.4.5             pkgload_1.2.3          
+##  [61] nnet_7.3-16             rlang_0.4.12            diptest_0.76-0          lifecycle_1.0.1        
+##  [65] miniUI_0.1.1.1          dbscan_1.1-10           modelr_0.1.8            cellranger_1.1.0       
+##  [69] rprojroot_2.0.2         shinyFiles_0.9.1        Matrix_1.3-4            aplot_0.1.1            
+##  [73] phangorn_2.7.1          carData_3.0-4           boot_1.3-28             reprex_2.0.1           
+##  [77] beeswarm_0.4.0          GlobalOptions_0.1.2     processx_3.5.2          png_0.1-7              
+##  [81] viridisLite_0.4.0       rjson_0.2.20            bitops_1.0-7            shape_1.4.6            
+##  [85] stevedore_0.9.4         gridGraphics_0.5-1      scales_1.1.1            memoise_2.0.0          
+##  [89] magrittr_2.0.1          zlibbioc_1.40.0         compiler_4.1.1          RColorBrewer_1.1-2     
+##  [93] plotrix_3.8-2           clue_0.3-60             snakecase_0.11.0        cli_3.1.0              
+##  [97] XVector_0.34.0          ps_1.6.0                formatR_1.11            MASS_7.3-54            
+## [101] tidyselect_1.1.1        stringi_1.7.5           highr_0.9               yaml_2.2.1             
+## [105] grid_4.1.1              sass_0.4.0              fastmatch_1.1-3         tools_4.1.1            
+## [109] parallel_4.1.1          circlize_0.4.13         rstudioapi_0.13         bluster_1.4.0          
+## [113] foreach_1.5.1           gridExtra_2.3           scatterplot3d_0.3-41    farver_2.1.0           
+## [117] digest_0.6.28           FNN_1.1.3               shiny_1.7.1             quadprog_1.5-8         
+## [121] fpc_2.2-9               Rcpp_1.0.7              car_3.0-12              broom_0.7.10           
+## [125] later_1.3.0             httr_1.4.2              ComplexHeatmap_2.10.0   kernlab_0.9-29         
+## [129] colorspace_2.0-2        rvest_1.0.2             fs_1.5.0                splines_4.1.1          
+## [133] uwot_0.1.10             yulab.utils_0.0.4       tidytree_0.3.5          expm_0.999-6           
+## [137] ggplotify_0.1.0         flexmix_2.3-17          containerit_0.6.0.9004  sessioninfo_1.2.1      
+## [141] xtable_1.8-4            jsonlite_1.7.2          ggtree_3.2.0            futile.options_1.0.1   
+## [145] modeltools_0.2-23       ggfun_0.0.4             testthat_3.1.0          ggimage_0.3.0          
+## [149] R6_2.5.1                pillar_1.6.4            htmltools_0.5.2         mime_0.12              
+## [153] glue_1.4.2              fastmap_1.1.0           BiocNeighbors_1.12.0    class_7.3-19           
+## [157] codetools_0.2-18        maps_3.4.0              pkgbuild_1.2.0          utf8_1.2.2             
+## [161] lattice_0.20-45         bslib_0.3.1             mixtools_1.2.0          numDeriv_2016.8-1.1    
+## [165] curl_4.3.2              ggbeeswarm_0.6.0        gtools_3.9.2            magick_2.7.3           
+## [169] survival_3.2-13         rmarkdown_2.11          desc_1.4.0              munsell_0.5.0          
+## [173] GetoptLong_1.0.5        fastcluster_1.2.3       GenomeInfoDbData_1.2.7  iterators_1.0.13       
+## [177] haven_2.4.3             gtable_0.3.0</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="session-info.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>(<span class="fu">library</span>(<span class="st">&quot;containerit&quot;</span>))</span>
+<span id="cb330-2"><a href="session-info.html#cb330-2" aria-hidden="true" tabindex="-1"></a>my_dockerfile <span class="ot">&lt;-</span> containerit<span class="sc">::</span><span class="fu">dockerfile</span>(<span class="at">from =</span> utils<span class="sc">::</span><span class="fu">sessionInfo</span>(),</span>
+<span id="cb330-3"><a href="session-info.html#cb330-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">versioned_libs =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb330-4"><a href="session-info.html#cb330-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">versioned_packages =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## INFO [2022-03-11 05:43:28] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:28] Trying to determine system requirements for the package(s) &#39;Biobase&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:28] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:28] Trying to determine system requirements for the package(s) &#39;BiocGenerics&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:29] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:29] Trying to determine system requirements for the package(s) &#39;BiocParallel&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:29] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:29] Trying to determine system requirements for the package(s) &#39;copykit&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:30] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:30] Trying to determine system requirements for the package(s) &#39;DNAcopy&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:30] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:30] Trying to determine system requirements for the package(s) &#39;GenomeInfoDb&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:31] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:31] Trying to determine system requirements for the package(s) &#39;GenomicRanges&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:31] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:31] Trying to determine system requirements for the package(s) &#39;IRanges&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:31] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:31] Trying to determine system requirements for the package(s) &#39;MatrixGenerics&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:32] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:32] Trying to determine system requirements for the package(s) &#39;remotes&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:32] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:32] Trying to determine system requirements for the package(s) &#39;Rsubread&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:33] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:33] Trying to determine system requirements for the package(s) &#39;S4Vectors&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:33] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:33] Trying to determine system requirements for the package(s) &#39;SingleCellExperiment&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:33] Going online? TRUE  ... to retrieve system dependencies (sysreq-api)
+## INFO [2022-03-11 05:43:33] Trying to determine system requirements for the package(s) &#39;SummarizedExperiment&#39; from sysreqs online DB
+## INFO [2022-03-11 05:43:34] Versioned packages enabled, installing &#39;versions&#39;
+## INFO [2022-03-11 05:43:34] Adding versioned CRAN packages: remotes
+## WARN [2022-03-11 05:43:34] Adding versioned Bioconductor packages not supported: DNAcopy, Rsubread, SingleCellExperiment, SummarizedExperiment, Biobase, GenomicRanges, GenomeInfoDb, IRanges, S4Vectors, BiocGenerics, MatrixGenerics, BiocParallel
+## INFO [2022-03-11 05:43:34] Adding Bioconductor packages: Biobase, BiocGenerics, BiocParallel, DNAcopy, GenomeInfoDb, GenomicRanges, IRanges, MatrixGenerics, Rsubread, S4Vectors, SingleCellExperiment, SummarizedExperiment
+## INFO [2022-03-11 05:43:34] Adding GitHub packages: navinlabcode/copykit@f709a486c8e2d45bd46738067e2f60ca268d64b2
+## INFO [2022-03-11 05:43:34] Created Dockerfile-Object based on sessionInfo</code></pre>
+<div id="dockerfile" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Dockerfile</h2>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="session-info.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_dockerfile)</span></code></pre></div>
+<pre><code>## FROM rocker/r-ver:4.1.1
+## LABEL maintainer=&quot;dminussi&quot;
+## RUN export DEBIAN_FRONTEND=noninteractive; apt-get -y update \
+##   &amp;&amp; apt-get install -y git-core
+## RUN [&quot;install2.r&quot;, &quot;versions&quot;]
+## RUN [&quot;Rscript&quot;, &quot;-e&quot;, &quot;versions::install.versions(&#39;remotes&#39;, &#39;1.1.1&#39;)&quot;]
+## RUN [&quot;install2.r&quot;, &quot;-r https://bioconductor.org/packages/3.14/bioc -r https://bioconductor.org/packages/3.14/data/annotation -r https://bioconductor.org/packages/3.14/data/experiment -r https://bioconductor.org/packages/3.14/workflows&quot;, &quot;Biobase&quot;, &quot;BiocGenerics&quot;, &quot;BiocParallel&quot;, &quot;DNAcopy&quot;, &quot;GenomeInfoDb&quot;, &quot;GenomicRanges&quot;, &quot;IRanges&quot;, &quot;MatrixGenerics&quot;, &quot;Rsubread&quot;, &quot;S4Vectors&quot;, &quot;SingleCellExperiment&quot;, &quot;SummarizedExperiment&quot;]
+## RUN [&quot;installGithub.r&quot;, &quot;navinlabcode/copykit@f709a486c8e2d45bd46738067e2f60ca268d64b2&quot;]
+## WORKDIR /payload/
+## CMD [&quot;R&quot;]</code></pre>
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+</div>
 </div>
             </section>
 

@@ -8,3 +8,15 @@ editor_options:
 ```{r session_info, include=TRUE}
 sessionInfo()
 ```
+
+```{r, warning=FALSE, message=FALSE}
+suppressPackageStartupMessages(library("containerit"))
+my_dockerfile <- containerit::dockerfile(from = utils::sessionInfo(),
+                                         versioned_libs = TRUE,
+                                         versioned_packages = TRUE)
+```
+
+## Dockerfile
+```{r}
+print(my_dockerfile)
+```
